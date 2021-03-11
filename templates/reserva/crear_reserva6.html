@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_1.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate pb-0 text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="#">Reserva <i
+                class="fa fa-chevron-right"></i></a></span> <span>Detalle Reserva <i
+              class="fa fa-chevron-right"></i></span></p>
+        <h1 class="mb-3 bread">Detalle Reserva</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 heading-section text-center ftco-animate mb-5">
+        <span class="subheading">Detalle Reserva</span>
+        <h2 class="mb-2">Paso 6</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <a href="#" class="search-place img" style="background-image: url('{{ reserva.id_depto.image }}');">
+          <div class="desc">
+            <h3><span>{{ reserva.id_depto.referencia }}</span></h3>
+            <span>{{ reserva.id_depto.zona }}</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-8">
+   
+          <div class="form-group">
+            <a href="#">Monto Estadía:</a>
+            {{reserva.monto_estadia}}
+          </div>
+          <div class="form-group">
+            <a href="#">Cantidad de Días:</a>
+
+            {{reserva.n_dias}}
+          </div>
+
+          <div class="form-group">
+            <a href="#">Check In:</a>
+            {{reserva.fecha_inicio}} desde las 12:00
+          </div>
+
+          <div class="form-group">
+            <a href="#">Check Out:</a>
+            {{reserva.fecha_termino}} hasta las 12:00
+          </div>
+          <div class="form-group">
+            <a href="#">Monto Multa:</a>
+
+            {{monto}}
+          </div>
+
+          <a href="{% url 'web:crear_pago3' reserva.id  %}"><button
+                        class="btn btn-danger btn-1x">Realizar Pago Multa</button></a>
+
+
+        <body>
+          <script
+            src="https://www.paypal.com/sdk/js?client-id=AZmHzZlD5450v6LJHjORdpUJJjb0DtxpR4jqjt6PvQ-TStbOhH8e37LhOxkW8yd5E-yoHkiUCOOwbg_t">
+            </script>
+          <div id="paypal-button-container"></div>
+          <script type="text/javascript">
+            var total = '{{monto}}'
+            paypal.Buttons({
+              style: {
+                color: 'blue',
+                shape: 'rect',
+              },
+              createOrder: function (data, actions) {
+                // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+                      currency_code: "USD",
+                      value: parseFloat(total).toFixed(2)
+                    }
+                  }]
+                });
+              },
+              onApprove: function (data, actions) {
+                // This function captures the funds from the transaction.
+                return actions.order.capture().then(function (details) {
+                  // This function shows a transaction success message to your buyer.
+                  // alert('La transacción a sido completada con éxito por:  ' + details.payer.name.given_name);
+                  window.location.href = "{% url 'web:crear_pago' reserva.id %}"
+
+                });
+              }
+            }).render('#paypal-button-container');
+              //This function displays Smart Payment Buttons on your web page.
+          </script>
+
+        </body>
+      </div>
+
+    </div>
+    <div class="tag-widget post-tag-container mb-5 mt-5">
+      <div class="tagcloud">
+        <a href="#" class="tag-cloud-link">Dormitorios: {{ reserva.id_depto.dormitorio }} </a>
+        <a href="#" class="tag-cloud-link">Baño: {{ reserva.id_depto.baño }}</a>
+        <a href="#" class="tag-cloud-link">Zona: {{ reserva.id_depto.zona }}</a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style>
+    .img-invoice {
+        width: 50px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .head {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    #invoice thead tr th {
+        text-align: left;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding-top: 4px;
+    }
+
+    #invoice thead tr {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    #invoice tbody tr {
+        padding: 0;
+    }
+
+    .text-center{
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <p>
+        <b>Departamento:</b> {{ depto }}<br>
+      
+        
+    </p>
+    <table id="invoice" class="table table-bordered table-responsive-md table-striped text-justifi">
+        <thead>
+            <tr>
+                <th class="text-center">Nombre de Elemento</th>
+                <th class="text-center">Valor de Elemento</th>
+                <br>
+            </tr>
+        </thead>
+        <br>
+        <tbody>
+            {% for items in inventario %}
+            
+            <tr>
+                <td>{{ items.id_elemento }}</td>
+                <td>{{ items.cantidad }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   
+    <!-- Editable table -->
+</body>
+
+</html>

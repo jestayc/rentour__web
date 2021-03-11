@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Listar{% endblock title %}
+
+{% block content %}
+<!-- details -->
+
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate pb-0 text-center">
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/#depto">Departamentos <i class="fa fa-chevron-right"></i></a></span> <span>Departamento Detalles <i class="fa fa-chevron-right"></i></span></p>
+          <h1 class="mb-3 bread">Departamento Detalles</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="ftco-section ftco-property-details">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="property-details">
+                    <div class="img" style="background-image: url('{{ depto.image}}');">
+                        <a href="https://vimeo.com/45830194" class="img-video popup-vimeo d-flex align-items-center justify-content-center">
+                        <span class="fa fa-play"></span>
+                    </a>
+                    </div>
+                    <div class="text">
+                        <span class="subheading">{{ depto.zona }}</span>
+                        <h2>{{ depto.referencia }}</h2>
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'web:depto_lista'%}"><button
+                            class="btn btn-warning btn-lg btn-block"></i> Ver Departamentos</i></button></a>
+                            <br>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pills">
+                      <div class="bd-example bd-example-tabs">
+                          <div class="d-flex">
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+                              <li class="nav-item">
+                                <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Características</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Descripción</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Reseñas</a>
+                              </li>
+                            </ul>
+                          </div>
+
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                              <div class="row">
+                                  <div class="col-md-2">
+                                      <ul class="features">
+                                          
+                                          <li class="check"><img src="/static/images/comprobar.png" alt=""></span> Dormitorios: {{ depto.dormitorio }}</li>
+                                          <li class="check"><img src="/static/images/comprobar.png" alt=""></span> Baños: {{ depto.baño }}</li>                                         
+                                      </ul>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <ul class="features">
+                                        
+                                        <li class="check"><img src="/static/images/comprobar.png" alt=""></span> Valor Arriendo: {{ depto.valor_arriendo }}</li>
+                                        <li class="check"><img src="/static/images/comprobar.png" alt=""></span> % Anticipo: {{ depto.pct_anticipo }}%</li>
+                                       
+                                    </ul>
+                                </div>
+                                  <div class="col-md-6">
+                                      <ul class="features">
+                                          <li class="check"><img src="/static/images/comprobar.png" alt=""></span> Detalles: {{ depto.detalles }}</li>
+                                          <li class="check"><img src="/static/images/comprobar.png" alt=""></span> Dirección: {{ depto.direccion }}</li>
+
+                                      
+                                      </ul>
+                                  </div>
+                                
+                              </div>
+
+                              <br>
+                              <br>
+                              <a href="{% url 'web:crear_reservaInicial' depto.id_depto %}"><button
+                                class="btn btn-primary btn-lg btn-block"><i class="fa fa-refresh fa-spin"></i> Realizar la Reserva</i></button></a>
+                                <br>
+                                
+                                <a href="/#depto"><button
+                                class="btn btn-info btn-lg btn-block"><i class="lnr lnr-apartment fa-spin"></i> Ir a lista departamentos</i></button></a>
+                          </div>
+
+                          <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+                            <p>Este departamento se encuentra en Viña del Mar, a 250 metros de Reñaca y a 1,5 km de Cochoa, y ofrece alojamiento con terraza y aparcamiento privado gratuito. El establecimiento se encuentra a 2,2 km de Las Salinas, a 4,4 km de la playa de Los Marineros y a 7 km del castillo Wulff. El centro comercial Mall Plaza Reñaca está a 600 metros y Playa Blanca, a 3,7 km.</p>
+                            <p>El Valparaíso Sporting Club y el Reloj de Flores se encuentran a 8 km del establecimiento.</p>
+                            <p>A las parejas les encanta la ubicación — Le han puesto un 9,6 para viajes de dos personas.</p>
+                          </div>
+
+                          <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                            <div class="row">
+                                     <div class="col-md-7">
+                                         <h3 class="head">23 Reviews</h3>
+                                         <div class="review d-flex">
+                                             <div class="user-img" style="background-image: url(/static/images/person_1.jpg)"></div>
+                                             <div class="desc">
+                                                 <h4>
+                                                     <span class="text-left">Jorge Arriagada</span>
+                                                     <span class="text-right">14 Febrero 2020</span>
+                                                 </h4>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                     </span>
+                                                     <span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
+                                                 </p>
+                                                 <p>“Me encantó la hospitalidad de Camila y la señora Lucrecia.! Fue como sentirse en casa de un familiar. La habitación súper cómoda, la vista desde la terraza muy linda. Cercana a la playa. Lo pasamos muy bien con mis hijos ahí! Recomiendo al 100%”</p>
+                                             </div>
+                                         </div>
+                                         <div class="review d-flex">
+                                             <div class="user-img" style="background-image: url(/static/images/person_2.jpg)"></div>
+                                             <div class="desc">
+                                                 <h4>
+                                                     <span class="text-left">Fabián Leiva</span>
+                                                     <span class="text-right">11 Enero 2020</span>
+                                                 </h4>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                     </span>
+                                                     <span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
+                                                 </p>
+                                                 <p>“Excelente ubicación, en pocos minutos estás en todo el comercio, restaurantes, supermercados, tiendas, cafés y lo más importante, de la playa.”</p>
+                                             </div>
+                                         </div>
+                                         <div class="review d-flex">
+                                             <div class="user-img" style="background-image: url(/static/images/person_3.jpg)"></div>
+                                             <div class="desc">
+                                                 <h4>
+                                                     <span class="text-left">José Estay</span>
+                                                     <span class="text-right">14 Diciembre 2019</span>
+                                                 </h4>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                        <img src="/static/images/estrella.png" alt="">
+                                                     </span>
+                                                     <span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
+                                                 </p>
+                                                 <p>“Recomendable 100% desde lo limpio, comodidad y hasta lo agradable del personal.
+                                                    La vista de la terraza genial </p>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-5">
+                                         <div class="rating-wrap">
+                                             <h3 class="head">Give a Review</h3>
+                                             <div class="wrap">
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                       
+                                                         (98%)
+                                                     </span>
+                                                     <span>20 Reviews</span>
+                                                 </p>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                         (85%)
+                                                     </span>
+                                                     <span>10 Reviews</span>
+                                                 </p>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        
+                                                         (70%)
+                                                     </span>
+                                                     <span>5 Reviews</span>
+                                                 </p>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                        
+                                                         (10%)
+                                                     </span>
+                                                     <span>0 Reviews</span>
+                                                 </p>
+                                                 <p class="star">
+                                                     <span>
+                                                        <img src="/static/images/insignia.png" alt="">
+                                                         (0%)
+                                                     </span>
+                                                     <span>0 Reviews</span>
+                                                 </p>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                          </div>
+                        </div>
+                      </div>
+            </div>
+              </div>
+    </div>
+  </section>
+
+
+
+
+
+<!-- details -->
+{% endblock content %}

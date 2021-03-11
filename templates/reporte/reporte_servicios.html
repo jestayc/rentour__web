@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style>
+    .img-invoice {
+        width: 50px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .head {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    #invoice thead tr th {
+        text-align: left;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding-top: 4px;
+    }
+
+    #invoice thead tr {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    #invoice tbody tr {
+        padding: 0;
+    }
+
+    .text-center{
+        text-align: center;
+    }
+</style>
+<body>
+<img src="/static/assets/img/logo.png" class="img-invoice">
+<p class="head">
+    {{ comp.name|upper }}<br>
+    {{ comp.ruc }}<br>
+    {{ comp.address|upper }}
+</p>
+{% for servicio in servicios %}
+<p>
+    <b>Reserva:</b> {{servicio.id_depto}}<br>
+    <b>Check In:</b> {{servicio.fecha_inicio}}<br>
+    <b>Check Out:</b> {{servicio.fecha_termino}}<br>
+    <b>Cliente:</b> {{servicio.id_usuario}}<br>
+    <b>Email:</b> {{servicio.email}}<br>
+    
+</p>
+<table id="invoice">
+    <thead>
+    <tr>
+        <th style="width: 20%;">DEPARTAMENTO</th>
+        <th style="width: 20%;">N° PERONAS</th>
+        <th style="width: 20%;">DÍAS</th>
+        <th style="width: 20%;">VISITANTES</th>
+        <th style="width: 20%;">FECHA RESERVA</th>
+        
+       
+    </tr>
+    </thead>
+    <tbody>
+        
+        <tr style="padding-top: 5px;" >
+            <td>{{servicio.id_depto}}</td>
+            <td >{{servicio.n_personas}}</td>
+            <td >{{servicio.n_dias}}</td>
+            <td>{{servicio.visitantes}}</td>
+            <td>{{servicio.fecha_reserva}}</td>          
+        </tr>
+    
+       
+</table>
+<br>
+<br>
+<table id="invoice">
+    <thead>
+    <tr>
+        <th style="width: 35%;">CHECK IN</th>
+        <th style="width: 35%;">CHECK OUT</th>
+        <th style="width: 35%;">SERVICIOS EXTRAS</th>
+        
+        
+       
+    </tr>
+    </thead>
+    <tbody>
+        
+        <tr style="padding-top: 5px;" >
+            <td>{{servicio.fecha_inicio}}</td>
+            <td>{{servicio.fecha_termino}}</td>
+            <td>{{servicio.pago_servicioextra}}</td>
+                 
+        </tr>
+    
+       
+</table>
+<br>
+<br>
+<table id="invoice">
+    <thead>
+    <tr>
+        
+        <th style="width: 30%;">MONTO DIARIO</th>
+        <th style="width: 30%;">SERVICIOS EXTRAS</th>
+        <th style="width: 30%;">MULTA</th>
+        <th style="width: 30%;">PAGO ANTICIPO</th>
+        
+       
+    </tr>
+    </thead>
+    <tbody>
+        
+        <tr style="padding-top: 5px;" >
+            <td>{{servicio.monto_pordia}}</td>
+            <td>{{servicio.monto_servicioextra}}</td>
+            <td>{{servicio.monto_multa}}</td>
+            <td>{{servicio.pago_anticipo}}</td>          
+        </tr>
+        <p></p>
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td colspan="4"><b>MULTAS</b></td>
+            <td style="text-align: right">{{servicio.monto_multa}}</td>
+        </tr>
+        
+        <tr style="padding-top: 0px;">
+            <td colspan="4"><b>% ANTICIPO</b></td>
+            <td style="text-align: right">{{servicio.pago_anticipo}}</td>
+        </tr>
+        <tr style="border-top: 1px solid black; padding-top: 4px;">
+            <td colspan="4"><b>SUBTOTAL</b></td>
+            <td style="text-align: right">{{servicio.pago_total}}</td>
+        </tr>
+        <tr style="padding-top: 0px;">
+            <td colspan="4"><b>TOTAL A PAGAR</b></td>
+            <td style="text-align: right">{{servicio.monto_estadia}}</td>
+        </tr>
+        </tbody>
+    </table>
+       
+</table>
+
+{% endfor %}
+
+
+
+
+
+
+<table style="margin-top: 250px;">
+    <thead>
+    <tr>
+        <th>****GRACIAS POR SU COMPRA****</th>
+    </tr>
+    <tr>
+        <th>NOSE ACEPTAN CAMBIOS NI DEVOLUCIONES</th>
+    </tr>
+    </thead>
+</table>
+</body>
+</html>

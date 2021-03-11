@@ -1,0 +1,96 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Reserva</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Lista Reserva</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+					   <a class="btn btn-primary" href="#" role="button">Ir a Agregar Elemento</a>					
+					</div>
+				</div>
+			</div>
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+				<table class="table table-bordered table-responsive-xl table-striped text-justifi">
+					<thead>
+						<tr>
+							<th class="text-center">PDF</th>
+							<th class="text-center">Id Reserva</th>
+							<th class="text-center">Departamento</th>
+							<th class="text-center">Check List</th>
+							<th class="text-center">Check In</th>
+							
+							<th class="text-center">Check Out</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+						<tr>
+							<td><a href="{% url 'web:reporte' item.id %}">
+							<button class="btn btn-success btn-1x"><i class="fa fa-download center fa-inverse"  ></i></button></a>
+						
+					   </td>
+							<td style="text-align: center; ">{{ item.id }}</td>
+							<td style="text-align: center; ">{{ item.id_depto }}</td>
+							<td style="text-align: center; ">
+								<a href="{% url 'web:ver_checklist' item.id %}"><button class="btn btn-secondary btn-2x"><i class="fa fa-eye"></i> Ver</button></a>
+							</td>
+							<td style="text-align: center; ">
+								<a href="{% url 'web:crear_checkin' item.id %}"><button class="btn btn-info btn-2x"><i class="fa fa-refresh fa-spin"></i> Ingresar</i></button></a>
+								<a href="{% url 'web:ver_checkin' item.id %}"><button class="btn btn-secondary btn-2x"><i class="fa fa-eye"></i> Ver</button></a>
+							</td>
+						
+							<td style="text-align: center; ">
+								<a href="{% url 'web:crear_checkout' item.id %}"><button class="btn btn-danger btn-2x"><i class="fa fa-refresh fa-spin"></i>Ingresar</i></button></a>
+								<a href="{% url 'web:ver_checkout' item.id %}"><button class="btn btn-secondary btn-2x"><i class="fa fa-eye"></i> Ver</button></a>
+							</td>
+						</tr>
+						
+						{% endfor %}
+					</tbody>
+				</table>
+	
+				<nav aria-label="Page navigation example">
+					<ul class="pagination" style="justify-content: center; color: black;">
+						{% if page_obj.has_previous %}
+						<li class="page-item"><a class="page-link"
+								href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+						{% endif %}
+						{% for i in paginator.page_range %}
+						<li class="page-item" {% if page_obj.number == i %} class="active" {% endif %}>
+							<a class="page-link" href="?page={{i}}">{{ i }}</a>
+						</li>
+						{% endfor %}
+	
+						{% if page_obj.has_next %}
+						<li class="page-item"><a class="page-link"
+								href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+						</li>
+						{% endif %}
+					</ul>
+				</nav>
+
+	
+		
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+
+{% endblock %} 

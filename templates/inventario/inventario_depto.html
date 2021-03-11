@@ -1,0 +1,93 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Inventario</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Departamentos</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+					   <a class="btn btn-primary" href="{% url 'web:elemento_agregar' %}" role="button">Ir a Agregar Elemento</a>					
+					</div>
+				</div>
+            </div>
+            
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+                <table class="table table-bordered table-responsive-md table-striped text-justifi">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Referencia</th>
+                            <th class="text-center">Zona</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Inventario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td class="text-center">{{ item.referencia }}</td>
+                            <td class="text-center">{{ item.zona }}</td>
+
+                            <td class="text-center">{{ item.estado_depto }}</td>
+                            <td class="text-center" style="text-align: center; ">
+
+                                <a href="{% url 'web:crear_inventario' item.id_depto %}">
+                                    <button class="btn btn-warning btn-2x">
+                                        <i class="fa fa-refresh fa-spin"></i> Agregar</i></button></a>
+
+                                <a href="{% url 'web:ver_inventario' item.id_depto %}">
+                                    <button class="btn btn-info btn-2x">
+                                        <i class="fa fa-eye"></i>Ver</button></a>
+
+                                <a href="{% url 'web:descarga_inventario' item.id_depto %}">
+                                    <button class="btn btn-success btn-1x">
+                                        <i class="fa fa-download center fa-inverse"></i></button></a>
+
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example" style="text-align: center;">
+                    <ul class="pagination" style="justify-content: center; color: black;">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                        <li class="page-item" {% if page_obj.number == i %} class="active" {% endif %}>
+                            <a class="page-link" href="?page={{i}}">{{ i }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+	
+		
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+{% endblock %}

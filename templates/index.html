@@ -1,0 +1,619 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div>
+    <section class="hero-wrap" style="background-image: url('static/images/bg_1.jpg');"
+        data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center">
+                <div class="col-lg-7 col-md-6 ftco-animate d-flex align-items-end">
+                    <div class="text">
+                        <h1 class="mb-4">RentOur </h1>
+                        <h1 class="mb-4">Alquilar & Turistear</h1>
+                        <p style="font-size: 25px;">La mejor opción de alojamiento en la zonas turísticas
+                            a lo largo de nuestro país con más espacio, más comodidad</p>
+                        <p><a href="#depto" class="btn btn-primary py-3 px-4">Rent Us</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="ftco-section ftco-no-pb ftco-no-pt bg-primary">
+        <div class="container">
+            <div class="row d-flex no-gutters">
+                <div class="col-md-3 d-flex align-items-stretch ftco-animate">
+                    <div class="media block-6 services services-bg d-block text-center px-4 py-5">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="flaticon-business"></span></div>
+                        <div class="media-body py-md-4">
+                            <h3>Confianza de miles de personas</h3>
+                            <p>El ayer es historia, el mañana es un misterio, pero hoy es un regalo. Por eso lo llaman
+                                presente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-stretch ftco-animate">
+                    <div class="media block-6 services services-bg services-darken d-block text-center px-4 py-5">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="flaticon-home"></span></div>
+                        <div class="media-body py-md-4">
+                            <h3>Amplia gama de propiedades</h3>
+                            <p>Nuestra empresa tiene a lo largo de Chile más de 10 Departamentos, listo y acondicionados
+                                para su uso.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-stretch ftco-animate">
+                    <div class="media block-6 services services-bg services-lighten d-block text-center px-4 py-5">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="flaticon-stats"></span></div>
+                        <div class="media-body py-md-4">
+                            <h3>Pasarela de Pago RentOur</h3>
+                            <p>Nuestro sistemas cuenta con todas las medidas de seguridad y estándar de acuerdo a las
+                                normas
+                                ISO.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-stretch ftco-animate">
+                    <div class="media block-6 services services-bg d-block text-center px-4 py-5">
+                        <div class="icon d-flex justify-content-center align-items-center"><span
+                                class="flaticon-quarantine"></span></div>
+                        <div class="media-body py-md-4">
+                            <h3>Ofertas de Temporadas</h3>
+                            <p>No existen las coincidencias en este mundo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Departamentos lista -->
+    <section id="depto" class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                    <span class="subheading">Departamentos</span>
+                    <h2 class="mb-2">Departamentos Disponible</h2>
+                </div>
+            </div>
+            <div class="row ftco-animate">
+                <div class="col-md-12">
+                    <div class="carousel-properties owl-carousel">
+                        {% for item in items %}
+                        <div class="item">
+
+                            <div class="property-wrap ftco-animate">
+                                <a href="" class="img" style="background-image: url('{{ item.image }}');">
+                                    <div class="rent-sale">
+                                        <span class="sale">Oferta!!</span>
+                                    </div>
+                                    <p class="price"><span class="orig-price">${{ item.valor_arriendo }}</span></p>
+                                </a>
+                                <div class="text">
+                                    <ul class="property_list">
+                                        <li><img src="{% static '/images/cama.png' %}" alt="">{{ item.dormitorio }}
+                                        </li>
+                                        <li><img src="{% static '/images/bano.png' %}" alt="">{{ item.baño }}</li>
+
+
+                                    </ul>
+                                    <h3><a href="#">{{ item.referencia }}</a></h3>
+                                    <span class="location"><strong>Zona: </strong>{{ item.zona }}</span>
+                                    <a href="{% url 'web:ver_depto' item.id_depto %}"
+                                        class="d-flex align-items-center justify-content-center btn-custom">
+                                        <span class="fa fa-link">
+                                    </a>
+                                    <div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
+
+                                        <span class="text-left">{{ item.direccion }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fin Departamentos por Zona -->
+
+    <!-- Departamentos por Zona -->
+    <section class="ftco-section ftco-no-pt">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                    <span class="subheading">Departamentos</span>
+                    <h2 class="mb-2">Departamentos por Zona</h2>
+                </div>
+            </div>
+         
+            <div class="row">
+                <div class="col-md-4">
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="search-place img" style="background-image: url('static/images/place-1.jpg');">
+                        <div class="desc">
+                            <h3><span>Norte</span></h3>
+                            <span>+2 Properties</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a  data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="search-place img" style="background-image: url('static/images/place-2.jpg');">
+                        <div class="desc">
+                            <h3><span>Litoral</span></h3>
+                            <span>+2 Properties</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="search-place img" style="background-image: url('static/images/place-3.jpg');">
+                        <div class="desc">
+                            <h3><span>Sur</span></h3>
+                            <span>+2 Properties</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <section id="depto" class="ftco-section">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                                    <span class="subheading">Departamentos</span>
+                                    <h2 class="mb-2">Departamentos Disponible Zona Norte</h2>
+                                </div>
+                            </div>
+                            {% for item in items %}
+
+                            <div class="row ftco-animate">
+                                <div class="col-md-12">
+                                    <div class="carousel-properties owl-carousel">
+                                            {% if item.zona == "Norte" %}
+                                                <div class="item">
+                                                    <div class="property-wrap ftco-animate">
+                                                        <a href="" class="img" style="background-image: url('{{ item.image }}');">
+                                                            <div class="rent-sale">
+                                                                <span class="sale">Oferta!!</span>
+                                                            </div>
+                                                            <p class="price"><span class="orig-price">${{ item.valor_arriendo }}</span></p>
+                                                        </a>
+                                                        <div class="text">
+                                                            <ul class="property_list">
+                                                                <li><img src="{% static '/images/cama.png' %}" alt="">{{ item.dormitorio }}
+                                                                </li>
+                                                                <li><img src="{% static '/images/bano.png' %}" alt="">{{ item.baño }}</li>
+                        
+                        
+                                                            </ul>
+                                                            <h3><a href="{% url 'web:ver_depto' item.id_depto %}">{{ item.referencia }}</a></h3>
+                                                            <span class="location"><strong>Zona: </strong>{{ item.zona }}</span>
+                                                            <a href="{% url 'web:ver_depto' item.id_depto %}"
+                                                                class="d-flex align-items-center justify-content-center btn-custom">
+                                                                <span class="fa fa-link">
+                                                            </a>
+                                                            <div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
+                        
+                                                                <span class="text-left">{{ item.direccion }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        {% endfor %}
+
+                    </section>
+                </div>
+              </div>
+              <div class="collapse" id="collapseExample1">
+                <div class="card card-body">
+                    <section id="depto" class="ftco-section">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                                    <span class="subheading">Departamentos</span>
+                                    <h2 class="mb-2">Departamentos Disponible en el Litoral Central</h2>
+                                </div>
+                            </div>
+                            <div class="row ftco-animate">
+                                <div class="col-md-12">
+                                    <div class="carousel-properties owl-carousel">
+                                        {% for item in items %}
+                                            {% if item.zona == "Litoral" %}
+                                                <div class="item">
+                                                    <div class="property-wrap ftco-animate">
+                                                        <a href="" class="img" style="background-image: url('{{ item.image }}');">
+                                                            <div class="rent-sale">
+                                                                <span class="sale">Oferta!!</span>
+                                                            </div>
+                                                            <p class="price"><span class="orig-price">${{ item.valor_arriendo }}</span></p>
+                                                        </a>
+                                                        <div class="text">
+                                                            <ul class="property_list">
+                                                                <li><img src="{% static '/images/cama.png' %}" alt="">{{ item.dormitorio }}
+                                                                </li>
+                                                                <li><img src="{% static '/images/bano.png' %}" alt="">{{ item.baño }}</li>
+                        
+                        
+                                                            </ul>
+                                                            <h3><a href="{% url 'web:ver_depto' item.id_depto %}">{{ item.referencia }}</a></h3>
+                                                            <span class="location"><strong>Zona: </strong>{{ item.zona }}</span>
+                                                            <a href="{% url 'web:ver_depto' item.id_depto %}"
+                                                                class="d-flex align-items-center justify-content-center btn-custom">
+                                                                <span class="fa fa-link">
+                                                            </a>
+                                                            <div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
+                        
+                                                                <span class="text-left">{{ item.direccion }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+              </div>
+              <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                    <section id="depto" class="ftco-section">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                                    <span class="subheading">Departamentos</span>
+                                    <h2 class="mb-2">Departamentos Disponible Zona Sur</h2>
+                                </div>
+                            </div>
+                            <div class="row ftco-animate">
+                                <div class="col-md-12">
+                                    <div class="carousel-properties owl-carousel">
+                                        {% for item in items %}
+                                            {% if item.zona == "Sur" %}
+                                                <div class="item">
+                                                    <div class="property-wrap ftco-animate">
+                                                        <a href="" class="img" style="background-image: url('{{ item.image }}');">
+                                                            <div class="rent-sale">
+                                                                <span class="sale">Oferta!!</span>
+                                                            </div>
+                                                            <p class="price"><span class="orig-price">${{ item.valor_arriendo }}</span></p>
+                                                        </a>
+                                                        <div class="text">
+                                                            <ul class="property_list">
+                                                                <li><img src="{% static '/images/cama.png' %}" alt="">{{ item.dormitorio }}
+                                                                </li>
+                                                                <li><img src="{% static '/images/bano.png' %}" alt="">{{ item.baño }}</li>
+                        
+                        
+                                                            </ul>
+                                                            <h3><a href="{% url 'web:ver_depto' item.id_depto %}">{{ item.referencia }}</a></h3>
+                                                            <span class="location"><strong>Zona: </strong>{{ item.zona }}</span>
+                                                            <a href="{% url 'web:ver_depto' item.id_depto %}"
+                                                                class="d-flex align-items-center justify-content-center btn-custom">
+                                                                <span class="fa fa-link">
+                                                            </a>
+                                                            <div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
+                        
+                                                                <span class="text-left">{{ item.direccion }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+              </div>
+        </div>
+    </section>
+    <!-- Fin Departamentos por Zona -->
+
+    <!-- Servicio Extra -->
+    <section id="servicio" class="ftco-section services-section bg-darken">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center heading-section heading-section-white ftco-animate">
+                    <span class="subheading">Servicios</span>
+                    <h2 class="mb-3">Adquiere Servicios Extras </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services services-2">
+                        <div class="media-body py-md-4 text-center">
+                            <div class="icon mb-1 d-flex align-items-center justify-content-center"><span>01</span>
+                                <img src="{% static '/images/blob.svg' %}" alt="">
+                            </div>
+                            <h3>Turismo</h3>
+                            <p>Se realizan rutas a zonas turísticas de ida y vuelta acorde a la zona.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services services-2">
+                        <div class="media-body py-md-4 text-center">
+                            <div class="icon mb-1 d-flex align-items-center justify-content-center"><span>02</span>
+                                <img src="{% static '/images/blob.svg' %}" alt=""></div>
+                            <h3>Servicio de Transporte</h3>
+                            <p>Desde Ubicación Hacia Departamento.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services services-2">
+                        <div class="media-body py-md-4 text-center">
+                            <div class="icon mb-1 d-flex align-items-center justify-content-center"><span>03</span>
+                                <img src="{% static '/images/blob.svg' %}" alt=""></div>
+                            <h3>Servicio de Traslado</h3>
+                            <p>Desde Departamento Hacia Ubicación.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- fin Servicio Extra -->
+
+    <!-- Estadistica -->
+    <section class="ftco-section ftco-no-pb ftco-no-pt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 order-md-last d-flex align-items-stretch">
+                    <div class="img w-100 img-2 mr-md-2" style="background-image: url(static/images/about.jpg);">
+                    </div>
+                    <div class="img w-100 img-2 ml-md-2" style="background-image: url(static/images/about-2.jpg);">
+                    </div>
+                </div>
+                <div class="col-md-5 wrap-about py-md-5 ftco-animate">
+                    <div class="heading-section pr-md-5">
+                        <h2 class="mb-4">Turismo-RentOur</h2>
+
+                        <p>La empresa “Turismo Real”, es una empresa familiar que se dedica al arriendo de departamentos 
+                            propiedad de la empresa, y otros servicios en zonas turísticas del país. 
+                            
+                        <p>Tiene 10 años en el mercado y de a poco se ha hecho conocida por la calidad de sus departamentos, 
+                            ubicación y trato gentil hacia los clientes.</p> 
+
+                        <p>Actualmente la empresa cuenta con +10 departamentos ubicados en zonas de alto interés turístico 
+                            para los clientes, todos ellos acondicionados con un alto estándar de calidad.</p> 
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="ftco-counter img" id="section-counter">
+        <div class="container">
+            <div class="row pt-md-5">
+                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 py-5 mb-4">
+                        <div class="text text-border d-flex align-items-center">
+                            <strong class="number">+<strong class="number" data-number="1000">0</strong></strong>
+                            <span>Reservas <br>Departamentos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 py-5 mb-4">
+                        <div class="text text-border d-flex align-items-center">
+                            <strong class="number">+<strong class="number" data-number="1000">0</strong></strong>
+                            <span>Clientes <br>Felices</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 py-5 mb-4">
+                        <div class="text text-border d-flex align-items-center">
+                            <strong class="number">+<strong class="number" data-number="10">0</strong></strong>
+                            <span>Departamentos <br>Zonas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 py-5 mb-4">
+                        <div class="text d-flex align-items-center">
+                            <strong class="number" data-number="3">0</strong>
+                            <span>Zonas <br>Turísticas de Chile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- fin Estadistica -->
+
+    <!-- Testimonios -->
+    <section class="ftco-section testimony-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <span class="subheading">Testimonios</span>
+                    <h2 class="mb-3">Clientes</h2>
+                </div>
+            </div>
+            <div class="row ftco-animate">
+                <div class="col-md-12">
+                    <div class="carousel-testimony owl-carousel">
+                        <div class="item">
+                            <div class="testimony-wrap py-4">
+                                <div class="text">
+                                    <span class="fa fa-quote-left"></span>
+                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
+                                        Vokalia
+                                        and Consonantia, there live the blind texts.</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-img"
+                                            style="background-image: url('/static/images/person_1.jpg')"></div>
+                                        <div class="pl-3">
+                                            <p class="name">Roger Scott</p>
+                                            <span class="position">Marketing Manager</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimony-wrap py-4">
+                                <div class="text">
+                                    <span class="fa fa-quote-left"></span>
+                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
+                                        Vokalia
+                                        and Consonantia, there live the blind texts.</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-img"
+                                            style="background-image: url('/static/images/person_2.jpg')"></div>
+
+                                        <div class="pl-3">
+                                            <p class="name">Roger Scott</p>
+                                            <span class="position">Marketing Manager</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimony-wrap py-4">
+                                <div class="text">
+                                    <span class="fa fa-quote-left"></span>
+                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
+                                        Vokalia
+                                        and Consonantia, there live the blind texts.</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-img"
+                                            style="background-image: url('/static/images/person_3.jpg')"></div>
+                                        <div class="pl-3">
+                                            <p class="name">Roger Scott</p>
+                                            <span class="position">Marketing Manager</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimony-wrap py-4">
+                                <div class="text">
+                                    <span class="fa fa-quote-left"></span>
+                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries
+                                        Vokalia
+                                        and Consonantia, there live the blind texts.</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-img"
+                                            style="background-image: url('/static/images/person_4.jpg"></div>
+                                        <div class="pl-3">
+                                            <p class="name">Roger Scott</p>
+                                            <span class="position">Marketing Manager</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- fin Testimonios -->
+
+    <section class="ftco-section ftco-agent">
+        <div class="container">
+            <div class="row justify-content-center pb-5">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <span class="subheading">Agents</span>
+                    <h2 class="mb-4">Our Agents</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 ftco-animate">
+                    <div class="agent">
+                        <div class="img">
+                            <img src="{% static '/images/team-1.jpg' %}" class="img-fluid" alt="Colorlib Template">
+                            <div class="desc">
+                                <h3><a href="#">Carlos Henderson</a></h3>
+                                <p class="h-info"><span class="location">Listing</span> <span class="details">10
+                                        Properties</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <div class="agent">
+                        <div class="img">
+                            <img src="{% static '/images/team-2.jpg' %}" class="img-fluid" alt="Colorlib Template">
+                        </div>
+                        <div class="desc">
+                            <h3><a href="#">Mike Bochs</a></h3>
+                            <p class="h-info"><span class="location">Listing</span> <span class="details">10
+                                    Properties</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <div class="agent">
+                        <div class="img">
+                            <img src="{% static '/images/team-3.jpg' %}" class="img-fluid" alt="Colorlib Template">
+                        </div>
+                        <div class="desc">
+                            <h3><a href="#">Jessica Moore</a></h3>
+                            <p class="h-info"><span class="location">Listing</span> <span class="details">10
+                                    Properties</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ftco-animate">
+                    <div class="agent">
+                        <div class="img">
+                            <img src="{% static '/images/team-4.jpg' %}" class="img-fluid" alt="Colorlib Template">
+                        </div>
+                        <div class="desc">
+                            <h3><a href="#">Sarah Geronimo</a></h3>
+                            <p class="h-info"><span class="position">Listing</span> <span class="details">10
+                                    Properties</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

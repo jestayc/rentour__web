@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_1.jpg');"
+    data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate pb-0 text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                                class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="#">Mis Reservas
+                            <i class="fa fa-chevron-right"></i></span></p>
+                <h1 class="mb-3 bread">Mis Reservas</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 heading-section text-center ftco-animate mb-5">
+                <span class="subheading">Reserva</span>
+                <h2 class="mb-2">Detalle Reserva</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-responsive-xl table-striped text-justifi">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Servicio Extra</th>
+                            <th class="text-center">Reserva</th>
+                            <th class="text-center">Fecha Inicio</th>
+                            <th class="text-center">Fecha Término</th>
+                            <th class="text-center">Cancelar Reserva</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+
+                        <tr>
+                            <td class="text-center" style="text-align: center; "><a
+                                    href="{% url 'web:crear_servicio' item.id %}"><button class="btn btn-info btn-1x"><i
+                                            class="fa fa-plus"></i></button></a>
+                            </td>
+                            <td>
+                                {{item.id_depto}}
+                            </td>
+                            <td>
+                                {{item.fecha_inicio}}
+                            </td>
+                            <td>
+                                {{item.fecha_termino}}
+                            </td>
+                            <td class="text-center" style="text-align: center; "><a
+                                    href="{% url 'web:cancelar_reserva' item.id %}"><button
+                                        class="btn btn-danger btn-1x"><i class="fa fa-trash-o"></i></button></a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 heading-section text-center ftco-animate mb-5">
+                <span class="subheading">Reserva</span>
+                <h2 class="mb-2">Servicios Extras</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 sidebar ftco-animate">
+                <div class="sidebar-box ftco-animate">
+                    <div class="categories">
+                        
+                        <span class="subheading">Tipos de Servicio Extra</span>
+                        <br>
+                        <br>
+                        <li><a href="#">Desde Ubicación Hacia Departamento <span></span></a></li>
+                        <li><a href="#">Desde Depto Hacia Ubicación <span></span></a></li>
+                        <li><a href="#">Tour Zonas Turisticas <span></span></a></li>
+                        
+                      </div>
+                </div>
+              </div>
+            <div class="col-md-8">
+                <table class="table table-bordered table-responsive-xl table-striped text-justifi">
+                    <thead>
+                        <tr>
+                            
+                            <th class="text-center">Reserva</th>
+                            <th class="text-center">Fecha Inicio</th>
+                            <th class="text-center">Fecha Término</th>
+                            <th class="text-center">Servicio Extra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for servicios in servicio %}
+
+                        <tr>
+                            
+                            <td>
+                                {{servicios.id_reserva}}
+                            </td>
+                            <td>
+                                {{servicios.id_depto}}
+                            </td>
+                            <td>
+                                {{servicios.id_tiposervicioextra}}
+                            </td>
+                            <td>
+                                {{servicios.estado_servicio}}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

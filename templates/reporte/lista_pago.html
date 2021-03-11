@@ -1,0 +1,90 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+
+<div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <h3 class="page-title">Elemento</h3>
+            <div id="toastr-demo" class="panel">
+                <div class="panel-body">
+                    <!-- CONTEXTUAL -->
+                    <div class="row">
+                        <div class="col-sm-9 "> 
+                        <h2>Lista de Pagos</h2>
+						</div>
+						<br>
+                     </div>
+                    <!-- END CONTEXTUAL -->
+                    <br>
+                    
+		<!-- INPUTS -->
+        <div class="panel">
+            
+            <div class="panel-body">
+              
+                <br>
+				<div class="card">
+					<div class="card-body">
+						<div id="table" class="table-editable">
+		
+						</div>
+                        <table class="table table-bordered table-responsive-md table-striped text-justifi">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Reserva</th>
+                                    <th class="text-center">Monto</th>
+                                    <th class="text-center">Observación</th>
+                                    <th class="text-center">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td>{{ item.id_reserva }}</td>
+                                    <td>{{ item.monto }}</td>
+                                    <td>{{ item.observaciones }}</td>
+                                    <td>{{ item.fecha }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination" style="justify-content: center; color: black;">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                                {% endif %}
+                                {% for i in paginator.page_range %}
+                                <li class="page-item" {% if page_obj.number == i %} class="active" {% endif %}>
+                                    <a class="page-link" href="?page={{i}}">{{ i }}</a>
+                                </li>
+                                {% endfor %}
+                        
+                                {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link"
+                                        href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!-- END INPUTS -->
+                    <br>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+</div>
+{% endblock %} 
+

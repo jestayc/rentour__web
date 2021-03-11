@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate pb-0 text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="#">Mis Reservas
+              <i class="fa fa-chevron-right"></i></span></p>
+        <h1 class="mb-3 bread">Ver Reserva</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section testimony-section ">
+  <div class="container">
+    <div class="row justify-content-left mb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span class="subheading">Reserva</span>
+        <h2 class="mb-9">Mi Reserva </h2>
+
+        <div class="col-sm-3 ">
+          <td><a href="{% url 'web:lista' %}" class="btn btn-primary">Volver a Reservas</a></td>
+        </div>
+      </div>
+
+    </div>
+    <table class="table table-bordered table-responsive-xl table-striped text-justifi">
+      <thead>
+        <tr>
+          <th class="text-center">Id Reserva</th>
+          <th class="text-center">Estado</th>
+          <th class="text-center">Depto</th>
+          <th class="text-center">Fecha Inicio</th>
+          <th class="text-center">Fecha Término</th>
+          <th class="text-center">Valor Estadía</th>
+          <th class="text-center">Estadía por Pagar</th>
+          {% if reserva.estado_reserva == 'Nueva' %}
+          <th class="text-center">Anular Reserva</th>
+          {% if reserva.por_pagar_estadia != 0 %}
+          <th class="text-center">Pagar Estadía Faltante</th>          
+          {% endif %}
+          {% endif %}
+          {% if reserva.estado_reserva == 'Solicitud' %}
+          <th class="text-center">Pagar Anticipo</th>
+          {% endif %}
+          {% if reserva.monto_multa != 0 %}          
+          {% if reserva.monto_multa != reserva.pago_multa %}
+          <th class="text-center">Monto Multa</th>
+          <th class="text-center">Pago Multa</th>
+          {% endif %}
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        <th>{{reserva.id}}</th>
+        <th>{{reserva.estado_reserva}}</th>
+        <th>{{reserva.id_depto}}</th>
+        <th>{{reserva.fecha_inicio}}</th>
+        <th>{{reserva.fecha_termino}}</th>
+        <th>{{reserva.monto_estadia}}</th>
+        <th>{{reserva.por_pagar_estadia }}</th>   
+        {% if reserva.estado_reserva == 'Nueva' %}
+
+        <th class="text-center" style="text-align: center; "><a
+            href="{% url 'web:cancelar_reserva' reserva.id %}"><button class="btn btn-danger btn-2x"><i
+                class="fa fa-trash-o"></i></button></a>
+        </th>
+        {% if reserva.por_pagar_estadia != 0 %}        
+        <th class="text-center" style="text-align: center; "><a href="{% url 'web:crear_reserva4' reserva.id %}"><button
+              class="btn btn-danger btn-2x"><i class="fa fa-credit-card"></i></button></a>
+        </th>
+        {% endif %}
+        {% endif %}
+
+        {% if reserva.estado_reserva == 'Solicitud' %}
+
+        <th class="text-center" style="text-align: center; "><a href="{% url 'web:crear_reserva2' reserva.id %}"><button
+              class="btn btn-primary btn-2x"><i class="fa fa-credit-card"></i></button></a>
+        </th>
+        {% endif %}
+        {% if reserva.monto_multa != 0   %}
+        {% if reserva.monto_multa != reserva.pago_multa %}
+        <th>{{reserva.monto_multa }}</th>
+        <th class="text-center" style="text-align: center; "><a href="{% url 'web:crear_reserva6' reserva.id %}"><button
+          class="btn btn-danger btn-2x"><i class="fa fa-credit-card"></i></button></a>
+    </th>
+        {% endif %}     
+        {% endif %}        
+      </tbody>
+    </table>
+  </div>
+
+
+  </div>
+  </div>
+</section>
+
+<!-- END WRAPPER -->
+{% if reserva.estado_reserva != 'Solicitud' %}
+<section class="ftco-section testimony-section ">
+  <div class="container">
+    <div class="row justify-content-left mb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span class="subheading">Reserva</span>
+        <h2 class="mb-3">Servicio Extra 
+          {% if reserva.monto_multa == 0  or  reserva.monto_multa != reserva.pago_multa %}
+          <a href="{% url 'web:crear_servicio' reserva.id %}"><button
+              class="btn btn-info btn-1x"><i class="fa fa-plus"></i></button></a>
+          {% endif %}
+            </h2>
+      </div>
+    </div>
+    <table class="table table-bordered table-responsive-xl table-striped text-justifi">
+      <thead>
+        <tr>
+          <th scope="col">Tipo Servicio</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Ubicación</th>
+          <th scope="col">Conductor</th>
+          <th scope="col">Vehículo</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Fecha realización</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Eliminar Servicio</th>          
+          <th scope="col">Pagar Servicio</th>        
+          <th scope="col">Descargar Servicio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for servicio in servicios %}
+        <tr>
+          <th scope="row">{{servicio.id_tiposervicioextra}}</th>
+          <th scope="row">{{servicio.estado_servicio}}</th>
+          <th scope="row">{{servicio.ubicacion |default:"Sin Información"}}</th>
+          <th scope="row">{{servicio.conductor |default:"Sin Información"}}</th>
+          <th scope="row">{{servicio.vehiculo |default:"Sin Información"}}</th>
+          <th scope="row">{{servicio.valor |default:"Sin Información"}}</th>
+          <th scope="row">{{servicio.fecha_dia | date:'d-m-Y'}}</th>
+          <th scope="row">{{servicio.fecha_hora }}</th>
+          {% if not servicio.check_pago %}
+          <td class="text-center" style="text-align: center; ">
+            <a href="{% url 'web:eliminar_servicio' servicio.id %}">
+              <button class="btn btn-danger btn-1x"><i class="fa fa-trash-o"></i></button></a>
+          </td>          
+          {% if servicio.estado_servicio != 'Solicitud' %}
+          <td class="text-center" style="text-align: center; ">
+
+            <a href="{% url 'web:servicio_pago' servicio.id %}">
+              <button class="btn btn-danger btn-1x"><i class="fa fa-credit-card"></i></button></a>
+
+          </td>
+          <td class="text-center" style="text-align: center; ">-</td> 
+          {% else %}
+          <td class="text-center" style="text-align: center; ">-</td> 
+          <td class="text-center" style="text-align: center; ">-</td> 
+          {% endif %}
+          {% else %}
+          <td class="text-center" style="text-align: center; ">-</td>          
+          <td class="text-center" style="text-align: center; ">-</td>
+          <td><a href="{% url 'web:descarga_servicio' servicio.id %}">
+						<button class="btn btn-success btn-1x"><i class="fa fa-download center fa-inverse"  ></i></button></a>
+					
+				   </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+  </div>
+</section>
+
+<section class="ftco-section testimony-section ">
+  <div class="container">
+    <div class="row justify-content-left mb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <span class="subheading">Reserva</span>
+        <h2 class="mb-3">Pagos</h2>
+      </div>
+    </div>
+    <table class="table table-bordered table-responsive-xl table-striped text-justifi">
+      <thead>
+        <tr>
+          <th scope="col">Detalle</th>
+          <th scope="col">Tipo de Cobro</th>
+          <th scope="col">Monto</th>
+          <th scope="col">Fecha Término</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pago in pagos %}
+        <tr>
+          <th scope="row">{{pago.observaciones}}</th>
+          <th scope="row">{{pago.id_detalleservicio.id_tiposervicioextra | default:'Estadía o Multa'}}</th>
+          <th scope="row">{{pago.monto}}</th>
+          <th scope="row">{{pago.fecha}}</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

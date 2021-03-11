@@ -1,0 +1,80 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'base/src/plugins/fullcalendar/lib/main.css' %}">
+
+
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Disponibildad - Agenda</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="{% url 'admin_base' %}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Agenda</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+						<div class="dropdown">
+							<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+								January 2018
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="#">Export List</a>
+								<a class="dropdown-item" href="#">Policies</a>
+								<a class="dropdown-item" href="#">View Assets</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+				<table class="table table-bordered table-responsive-md table-striped text-center">
+					<div id="calendar"></div>
+				</table>
+
+
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+
+<!-- END MAIN -->
+<script src="{% static 'base/src/plugins/fullcalendar/lib/main.js' %}"></script>
+<script src="{% static 'base/src/plugins/fullcalendar/lib/locales-all.js' %}"></script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var calendarUI = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarUI, {
+			headerToolbar: {
+				left: 'prev,next today',
+				center: 'title',
+			},
+			events: [
+				{% for reserva in object_list %}
+                {
+				title: "{{ reserva.id_depto}}",
+				start: '{{ reserva.fecha_inicio|date:"Y-m-d" }}',
+				end: '{{ reserva.fecha_termino|date:"Y-m-d" }}',
+			},
+			{% endfor %}
+
+			] 
+		});
+	calendar.render();
+	calendar.setOption('locale', 'es');
+	});
+</script>
+{% endblock %} 

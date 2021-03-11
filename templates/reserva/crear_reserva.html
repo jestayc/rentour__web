@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_1.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate pb-0 text-center">
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="#">Detalle Departamentossss <i
+                class="fa fa-chevron-right"></i></a></span> <span>Reserva <i
+              class="fa fa-chevron-right"></i></span></p>
+        <h1 class="mb-3 bread">Reserva</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-5">
+      <div class="col-md-12 heading-section text-center ftco-animate">
+        <span class="subheading">Reserva</span>
+        <h2 class="mb-4">Paso 1</h2>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-6 ftco-animate">
+        <p>
+
+        <div class="row">
+          <div class="col-md-12">
+            <a href="#" class="search-place img" style="background-image: url('{{ depto.image }}')" >
+              <div class="desc">
+                <h3><span>{{ depto.referencia }}</span></h3>
+                <span>{{ depto.zona }}</span>
+              </div>
+            </a>
+          </div>
+
+        </div>
+        </p>
+        <h2 class="mb-3">It is a long established fact a reader be distracted</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam
+          doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente
+          officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste
+          doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+        <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus
+          nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem
+          assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor
+          minima esse vero ut ea, repudiandae suscipit!</p>
+        <div class="tag-widget post-tag-container mb-5 mt-5">
+          <div class="tagcloud">
+            <a href="#" class="tag-cloud-link">Dormitorios: {{ depto.dormitorio }} </a>
+            <a href="#" class="tag-cloud-link">Baño: {{ depto.baño }}</a>
+            <a href="#" class="tag-cloud-link">Zona: {{ depto.zona }}</a>
+        
+          </div>
+        </div>
+
+
+      </div> <!-- .col-md-8 -->
+      <div class="col-md-6 sidebar ftco-animate">
+        <div class="sidebar-box ftco-animate">
+          <div class="categories">
+
+            
+      <table class="table table-bordered table-responsive-xl table-striped text-justifi">
+        <thead>
+            <tr>
+                <th class="text-center">Departamento</th>
+                <th class="text-center">Valor Día</th>
+                <th class="text-center">% Anticipo</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <th>{{depto}}</th>
+            <th>{{depto.valor_arriendo}}</th>
+            <th>{{depto.pct_anticipo}}</th>
+        </tbody>
+    </table>
+
+            <h3>Complete los siguientes datos:</h3>
+            <form action="#" method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+              {% csrf_token %}
+             
+              {{ form.as_p }}
+
+              <br>
+              <button type="" class="btn btn-primary btn-lg btn-block"><i class="fa fa-refresh fa-spin"></i> Realizar la
+                Reserva</i></button></a>
+              <br>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</section> <!-- .section -->
+
+{% endblock %}

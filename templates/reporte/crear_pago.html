@@ -1,0 +1,77 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<body>
+
+	<div class="main">
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container-fluid">
+				<h3 class="page-title">Pago</h3>
+				<div id="toastr-demo" class="panel">
+					<div class="panel-body">
+
+
+						<div class="row">
+							<div class="col-sm-9 ">
+								<h2>Agregar Pago</h2>
+							</div>
+							<br>
+							<div class="col-sm-3 ">
+								<td><a href="{% url 'web:lista_pago' %}" class="btn btn-primary">Ir a Lista
+										de Pago</a></td>
+							</div>
+						</div>
+
+						<!-- END CONTEXTUAL -->
+						<br>
+
+						<!-- INPUTS -->
+						<div class="panel">
+
+							<div class="panel-body">
+
+								<br>
+								<div class="card">
+									<div class="card-body">
+										<div id="table" class="table-editable">
+
+										</div>
+										<form method="post">
+											{% csrf_token %}
+
+											<div class="form-row">
+
+												<div class="form-group col-md-4 mb-0">
+													{{ form.id_reserva|as_crispy_field }}
+												</div>
+												<div class="form-group col-md-4 mb-0">
+													{{ form.monto|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-4 mb-0">
+													{{ form.observaciones|as_crispy_field }}
+												</div>
+											</div>
+											<br>
+
+											<button type="submit" class="btn btn-primary">Aceptar</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END INPUTS -->
+						<br>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END MAIN CONTENT -->
+	</div>
+
+
+	{% endblock %}

@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('/static/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate pb-0 text-center">
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Log In <i class="fa fa-chevron-right"></i></span></p>
+          <h1 class="mb-3 bread">Log In</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section contact-section">
+    <div class="container">
+      <div class="row block-9 justify-content-center mb-5">
+        <div class="col-md-8 mb-md-5">
+            <h2 class="text-center">Ingresa tu Cuenta <br>para realizar tu reserva</h2>
+            <form class="form-auth-small"  method="post">
+                {% csrf_token %}
+            <div class="form-group">
+                {{ form.username|as_crispy_field }}
+            </div>
+            <div class="form-group">
+                {{ form.password|as_crispy_field }}
+            </div>
+            <div class="form-group clearfix">
+                <label class="fancy-checkbox element-left">
+                    <input type="checkbox">
+                    <span>Recordar</span>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button>
+            
+            <div class="bottom">
+                <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Olvidaste tu Contraseña?</a></span>
+            </div>
+          </form>
+        
+        </div>
+      </div>
+
+
+{% endblock %}

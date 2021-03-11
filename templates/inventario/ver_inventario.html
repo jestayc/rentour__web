@@ -1,0 +1,86 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Inventario</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="{% url 'admin_base' %}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Ver Inventario Departamento</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+					   <a class="btn btn-primary" href="{% url 'web:inventario_depto' %}" role="button">Ir a Lista Inventario Depto</a>					
+					</div>
+				</div>
+			</div>
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+				<table class="table table-bordered table-responsive-xl table-striped text-justifi">
+					<thead>
+						<tr>
+							<th class="text-center">Elemento del Depto</th>
+							<th class="text-center">Cantidad</th>
+							<th class="text-center">Eliminar</th>
+							
+					
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+							<tr>
+								<td style="text-align: center; ">{{ item.id_elemento }}</td>
+								<td style="text-align: center; ">{{ item.cantidad }}</td>
+								<td style="text-align: center; ">
+									
+									<a href="{% url 'web:editar_inventario' item.id %}"><button
+											class="btn btn-info btn-1x" ><i class="fa fa-edit fa-1x"></i></button></a>
+			
+									<a href="{% url 'web:eliminar_inventario' item.id %}"><button
+											class="btn btn-danger btn-1x"><i class="fa fa-trash-o"></i></button></a>
+							</tr>
+						
+						{% endfor %}
+					</tbody>
+				</table>
+	
+				<nav aria-label="Page navigation example">
+					<ul class="pagination" style="justify-content: center; color: black;">
+						{% if page_obj.has_previous %}
+						<li class="page-item"><a class="page-link"
+								href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+						{% endif %}
+						{% for i in paginator.page_range %}
+						<li class="page-item" {% if page_obj.number == i %} class="active" {% endif %}>
+							<a class="page-link" href="?page={{i}}">{{ i }}</a>
+						</li>
+						{% endfor %}
+	
+						{% if page_obj.has_next %}
+						<li class="page-item"><a class="page-link"
+								href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+						</li>
+						{% endif %}
+					</ul>
+				</nav>
+
+	
+		
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+
+{% endblock %} 

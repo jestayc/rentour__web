@@ -1,0 +1,67 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Reserva</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Reserva Anuladas</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+					   <a class="btn btn-primary" href="#" role="button">Ir a ???</a>					
+					</div>
+				</div>
+			</div>
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+				<table class="table table-bordered table-responsive-xl table-striped text-justifi">
+					<thead>
+						<tr>
+							
+							<th class="text-center">#Reserva</th>
+							<th class="text-center">Fecha Inicio</th>
+							<th class="text-center">Fecha Término</th>
+							<th class="text-center">Estado Reserva</th>
+							<th class="text-center">Acciones</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+
+						<tr>
+						
+							<td style="text-align: center; ">{{item.id}}</td>
+							<td style="text-align: center; ">{{item.fecha_inicio}}</td>
+							<td style="text-align: center; ">{{item.fecha_termino}}</td>
+							<td style="text-align: center; ">{{item.estado_reserva}}</td>
+							<td class="text-center" style="text-align: center; "><a
+								href="{% url 'web:reembolso' item.id %}"><button
+									class="btn btn-info btn-1x"><i class="dw dw-diagonal-arrow-41"></i></button></a>
+									
+						</td>
+						
+						</tr>
+
+						{% endfor %}
+					</tbody>
+				</table>		
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+{% endblock %} 

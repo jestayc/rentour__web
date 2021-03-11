@@ -1,0 +1,137 @@
+% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Departamento</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="{% url 'admin_base' %}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Agregar Departamento</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+						<a class="btn btn-primary" href="{% url 'web:depto_lista' %}" role="button">Ir a Lista Departamento</a>
+					</div>
+				</div>
+			</div>
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+				<form id="contact-form" method="POST" action="" role="form" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="messages"></div>
+
+					<div class="controls">
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_image">Imagen <span style="color: red;">*</span></label>
+									<input id="form_image" type="text" name="image" class="form-control"
+										placeholder="Agregar una referencia del departamento *" required="required"
+										data-error="Firstname is required.">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_referencia">Referencia <span style="color: red;">*</span></label>
+									<input id="form_referencia" type="text" name="referencia" class="form-control"
+										placeholder="Agregar una referencia del departamento *" required="required"
+										data-error="Firstname is required.">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_direccion">Dirección <span style="color: red;">*</span></label>
+									<input id="form_direccion" type="text" name="direccion" class="form-control"
+										placeholder="Agregue una dirección *" required="required"
+										data-error="Lastname is required.">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_zona">Zona <span style="color: red;">*</span></label>
+									<input id="form_zona" type="text" name="zona" class="form-control"
+										placeholder="Ingrese Zona Ubicación Departamento *" required="required"
+										data-error="Valid email is required.">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_valor_arriendo">Valor Arriendo <span
+											style="color: red;">*</span></label>
+									<input id="form_valor_arriendo" type="text" name="valor_arriendo"
+										class="form-control" placeholder="Ingrese valor Arriendo">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_dormitorio">Dormitorio <span style="color: red;">*</span></label>
+									<input id="form_dormitorio" type="text" name="dormitorio" class="form-control"
+										placeholder="Ingrese Cantidad de Dormitorios*" required="required"
+										data-error="Valid email is required.">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_baño"> N° Baños <span style="color: red;">*</span></label>
+									<input id="form_baño" type="text" name="baño" class="form-control"
+										placeholder="Ingrese N° de baños*">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="form_pct_anticipo">Porcentaje Anticipo <span
+											style="color: red;">*</span></label>
+									<input id="form_pct_anticipo" type="text" name="pct_anticipo" class="form-control"
+										placeholder="Ingrese % de Anticipo *" required="required"
+										data-error="Valid email is required.">
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="form_detalles">Detalles <span style="color: red;">*</span></label>
+
+									<textarea id="form_detalles" name="detalles" class="form-control"
+										placeholder="Detalles*" rows="4" required
+										data-error="Please,leave us a message."></textarea>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<input type="submit" class="btn btn-primary btn-toastr" value="Agregar">
+							</div>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

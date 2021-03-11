@@ -1,0 +1,65 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Servicio Extra</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="{% url 'admin_base' %}l">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Agregar Detalle Servicio Extra
+								</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="col-md-6 col-sm-12 text-right">
+						<a class="btn btn-primary" href="#" role="button">Ir a Lista Servicio</a>
+					</div>
+				</div>
+			</div>
+			<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+				<form action="#" method="POST" enctype="multipart/form-data" class="form-horizontal">
+
+					{% csrf_token %}
+
+					<div class="form-group col-md-4 mb-0">
+						{{ form.id_reserva|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-4 mb-0">
+						{{ form.id_tiposervicioextra|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-4 mb-0">
+						{{ form.conductor|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-4 mb-0">
+						{{ form.ubicacion|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-4 mb-0">
+						{{ form.vehiculo|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-4 mb-0">
+						{{ form.valor|as_crispy_field }}
+					</div>
+					<div class="form-group col-md-4 mb-0">
+						{{ form.estado_servicio|as_crispy_field }}
+					</div>
+
+					<input type="submit" class="btn btn-primary btn-toastr" value="Agregar">
+				</form>
+			</div>
+		</div>
+		<div class="footer-wrap pd-20 mb-20 card-box">
+			Turismo - RentOur - Portafolio 001V - 2020 </a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
